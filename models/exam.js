@@ -5,7 +5,7 @@ const { ObjectId } = mongoose;
 
 const examSchema = new mongoose.Schema({
   _id: {
-    type: ObjectId,
+    type: String,
     trim: true,
     required: true,
     maxlength: 32,
@@ -21,11 +21,11 @@ const examSchema = new mongoose.Schema({
     required: true,
   },
   questions: {
-    type: Array[QuestionSchema],
+    type: Array,
     required: true,
   },
   answerKeys: {
-    type: Array[String],
+    type: Array,
     required: true,
   },
 });

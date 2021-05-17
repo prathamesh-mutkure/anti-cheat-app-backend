@@ -4,7 +4,7 @@ const { ObjectId } = mongoose;
 
 const studentSchema = new mongoose.Schema({
   _id: {
-    type: ObjectId,
+    type: String,
     required: true,
     trim: true,
   },
@@ -24,14 +24,14 @@ const studentSchema = new mongoose.Schema({
     required: true,
   },
   assignedExams: {
-    type: Array[ObjectId],
+    type: Array,
     default: [],
   },
 });
 
 studentSchema.methods = {
   authenticate: function (plainPassword) {
-    return this.plainPassword === this.password;
+    return plainPassword === this.password;
   },
 };
 
