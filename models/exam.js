@@ -4,7 +4,7 @@ const { QuestionSchema } = require("./question");
 const { ObjectId } = mongoose;
 
 const examSchema = new mongoose.Schema({
-  code: {
+  _id: {
     type: ObjectId,
     trim: true,
     required: true,
