@@ -1,5 +1,6 @@
 const { handleError, handleSuccess } = require("../utils/handleResponse");
-const Student = require("../models/Student");
+const { check, validationResult } = require("express-validator");
+const Student = require("../models/student");
 
 exports.login = (req, res) => {
   const errors = validationResult(req);
@@ -11,15 +12,15 @@ exports.login = (req, res) => {
     });
   }
 
-  Student.findById(id, (err, user) => {
+  Student.findById(id, (err, student) => {
     if (err) return handleError(res, "Database error, please try again!", 400);
 
-    if (!user) return handleError(res, "User does not exist!", 400);
+    if (!student) return handleError(res, "Student does not exist!", 400);
 
-    if (!user.authenticate(password))
+    if (!student.authenticate(password))
       return handleError(res, "Incorrect username or password!", 401);
 
-    const { _id, fname, lname, assignedExams } = user;
+    const { _id, fname, lname, assignedExams } = student;
 
     return res.json({ id: _id, fname, lname, assignedExams });
   });

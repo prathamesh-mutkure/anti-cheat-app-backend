@@ -16,11 +16,23 @@ exports.getAssignedExamList = (req, res) => {
   Exam.find({ _id: { $in: req.student.assignedExams } }, (err, exams) => {
     if (err || !exams) handleError(res, "DB Error, cannot get assigned Exams.");
 
+    console.log(req.student.assignedExams);
+    console.log(exams);
+
     exams.forEach((_, i) => {
       exams[i].questions = null;
       exams[i].answerKeys = null;
     });
 
-    return res.json(exams);
+    return res.json({ exams });
   });
+};
+
+exports.getExam = (req, res) => {
+  if (!req.exam) return handleError(res, "Cannot get Exam, DB Error!");
+
+  const _exam = exam;
+  _exam.answerKeys = null;
+
+  return res.json({ exam: _exam });
 };
