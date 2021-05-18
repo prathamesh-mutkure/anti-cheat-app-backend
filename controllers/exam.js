@@ -35,29 +35,11 @@ exports.getExam = (req, res) => {
 };
 
 exports.createExam = (req, res) => {
-  const map = new Map();
-
-  map.set("A", "1");
-  map.set("B", "2");
-  map.set("C", "3");
-  map.set("D", "None");
-
-  const exam = new Exam({
-    _id: "220002",
-    name: "Maths",
-    dateTime: Date.now(),
-    questions: [
-      {
-        title: "What is the sum of 1 and 2",
-        options: map,
-      },
-    ],
-    answerKeys: ["A"],
-  });
+  const exam = new Exam({ ...req.body });
 
   exam.save().then((exam) => {
     if (!exam) handleError(res, "Error creating Exam!");
 
-    res.json({ exam });
+    return res.json(exam);
   });
 };
