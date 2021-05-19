@@ -24,6 +24,11 @@ const examSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  questionCount: {
+    type: Number,
+    min: 0,
+    default: 0,
+  },
   answerKeys: {
     type: Array,
     required: true,
