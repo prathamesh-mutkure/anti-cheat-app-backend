@@ -16,7 +16,15 @@ const examSchema = new mongoose.Schema({
     required: true,
     maxlength: 16,
   },
-  dateTime: {
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
+    type: Date,
+    required: true,
+  },
+  durationInSeconds: {
     type: Date,
     required: true,
   },
