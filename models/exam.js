@@ -24,7 +24,7 @@ const examSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  durationInSeconds: {
+  duration: {
     type: Date,
     required: true,
   },
