@@ -27,6 +27,10 @@ const studentSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
+  submittedExams: {
+    type: Object,
+    default: {},
+  },
 });
 
 studentSchema.methods = {

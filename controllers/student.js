@@ -8,3 +8,17 @@ exports.getStudentByID = (req, res, next, id) => {
     next();
   });
 };
+
+exports.submitExam = (req, res) => {
+  const { examId, answers } = req.body;
+
+  const student = new Student(req.student);
+
+  student.submittedExams[examId] = answers;
+
+  student.save((err, student) => {
+    if (err) handleError(res, "Error submitting Exam!");
+
+    res.json(student.submittedExams);
+  });
+};
