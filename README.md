@@ -57,7 +57,7 @@ An App that aims to stop cheating in online exams with the power of AI and ML, c
   
   
 1. Clone the project locally
-   - `git clone https://github.com/Apurva-tech/unite.git`  
+   - `git clone https://github.com/prathamesh-mutkure/anti-cheat-app-backend.git`  
 3. Install node modules  
    - `npm install`  
 5. Create a `.env` file and set the following variables
