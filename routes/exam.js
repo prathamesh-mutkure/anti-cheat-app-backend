@@ -1,5 +1,6 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator");
+const { isSignedIn, isAuthenticated } = require("../controllers/auth");
 
 const router = express.Router();
 
@@ -15,10 +16,16 @@ const { getStudentByID } = require("../controllers/student");
 router.param("studentId", getStudentByID);
 router.param("examId", getExamById);
 
-router.get("/exam/:examId", getExam);
+router.get("/:studentId/exam/:examId", isSignedIn, isAuthenticated, getExam);
 
-router.get("/:studentId/assignedExams/all", getAssignedExamList);
+router.get(
+  "/:studentId/assignedExams/all",
+  isSignedIn,
+  isAuthenticated,
+  getAssignedExamList
+);
 
-router.post("/createExam", createExam);
+// TODO: Add isAdmin middleware
+router.post("/createExam", isSignedIn, isAuthenticated, createExam);
 
 module.exports = router;

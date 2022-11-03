@@ -1,5 +1,7 @@
 const { handleError, handleSuccess } = require("../utils/handleResponse");
 const { check, validationResult } = require("express-validator");
+const expressJwt = require("express-jwt");
+const jwt = require("jsonwebtoken");
 const Student = require("../models/student");
 
 exports.login = (req, res) => {
@@ -22,6 +24,30 @@ exports.login = (req, res) => {
 
     const { _id, fname, lname, assignedExams } = student;
 
-    return res.json({ id: _id, fname, lname, assignedExams });
+    // TODO: Set expiry to 1d
+    const token = jwt.sign({ id: _id }, process.env.JWT_SECRET, {
+      algorithm: "HS256",
+    });
+
+    return res.json({ id: _id, fname, lname, assignedExams, token });
   });
+};
+
+exports.isSignedIn = expressJwt({
+  secret: process.env.JWT_SECRET,
+  userProperty: "auth",
+  algorithms: ["HS256"],
+});
+
+exports.isAuthenticated = (req, res, next) => {
+  // Consistent "id"
+
+  const isAuthenticated =
+    req.student && req.auth && req.student._id === req.auth.id;
+
+  if (!isAuthenticated) {
+    return handleError(res, "Access denied, please login!", 403);
+  }
+
+  next();
 };
