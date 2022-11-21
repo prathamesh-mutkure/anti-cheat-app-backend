@@ -31,6 +31,10 @@ mongoose
     console.log(`DB CONNECTION ERR: ${err}`);
   });
 
+app.get("/api/hello", (req, res) => {
+  return res.send("Hello");
+});
+
 app.use("/api", authRoutes);
 app.use("/api", examRoutes);
 app.use("/api", studentRoutes);
